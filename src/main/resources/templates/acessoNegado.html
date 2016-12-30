@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+<title>Hello Spring Security</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" href="/css/main.css" th:href="@{/css/main.css}" />
+<link rel="stylesheet" type="text/css"
+	th:href="@{/css/bootstrap.min.css}" />
+<link rel="stylesheet" type="text/css" th:href="@{/css/error/error.css}" />
+</head>
+<body>
+	<div class="container">
+		<div class="row">
+			<div class="span12">
+				<div class="hero-unit center">
+				<br />
+				<br />
+				<br />
+				<br />
+				<br />
+					<h1>
+						Acesso Negado
+					</h1>
+					<br />
+					<p>
+						<h4><font face="Tahoma" color="red">Você não está autorizado a acessar esta página
+								</font></h4>
+					</p>
+					<br/>
+					<br/>
+					
+					<p>
+						
+					</p>
+					<a th:href="@{/home}" class="btn btn-large btn-info"><i
+						class="icon-home icon-white"></i>Leve-me para página Home</a>
+					<a th:href="@{/login}" class="btn btn-large btn-info"><i
+						class="icon-home icon-white"></i>Entrar com outra conta</a>
+				</div>
+				<br />
+				
+				
+				
+				
+				<br />
+				<p></p>
+				<!-- By ConnerT HTML & CSS Enthusiast -->
+			</div>
+		</div>
+	</div>
+	<h3 th:text="${errorMsg}"></h3>
+</body>
+</html>

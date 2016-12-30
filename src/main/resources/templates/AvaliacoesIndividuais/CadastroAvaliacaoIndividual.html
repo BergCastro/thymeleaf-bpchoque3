@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="LayoutPadrao">
+
+<head>
+<title>Cadastro de Avaliacão Individual</title>
+</head>
+
+<section layout:fragment="conteudo">
+	<form class="form-horizontal" method="POST"
+		th:action="@{/avaliacoesIndividuais}"
+		th:object="${avaliacaoIndividual}">
+		<div layout:include="MensagemGeral"></div>
+		<div layout:include="MensagemErro"></div>
+
+
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<div class="clearfix">
+					<h1 class="panel-title aw-titulo-panel">Nova Avaliação</h1>
+					<a class="btn btn-link aw-link-panel"
+						th:href="@{/avaliacoesIndividuais}">Voltar para Avaliações</a>
+				</div>
+			</div>
+
+			<div class="panel-body">
+				<input type="hidden" th:field="*{id}" />
+				<div class="panel panel-default">
+					<div class="panel-body">
+						<div class="form-group"
+							th:classappend="${#fields.hasErrors('dataAvaliacao')} ? has-error">
+							<label for="dataAvaliacao" class="col-sm-1 control-label">Data:</label>
+							<div class="col-sm-2">
+								<input type="text" class="form-control" id="dataAvaliacao"
+									name="data" th:field="*{dataAvaliacao}"
+									data-provide="datepicker" data-date-language="pt-BR"
+									data-date-autoclose="true" data-date-today-highlight="true"
+									data-date-orientation="bottom" />
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="avaliado" class="col-sm-1 control-label">Avaliado:</label>
+
+							<div class=" col-sm-4">
+
+								<select data-placeholder="Pesquisar" th:field="*{pessoa}"
+									id="avaliado" class="chosen-select form-control" tabindex="7">
+									<option value=""></option>
+									<option th:each="pessoa : ${pessoas}" th:value="${pessoa.id}"
+										th:text="|${pessoa.matricula} - ${pessoa.nome}|"></option>
+
+								</select>
+
+							</div>
+
+						</div>
+						
+					</div>
+				</div>
+
+
+				<ul class="nav nav-tabs">
+					<li class="active"><a data-toggle="tab"
+						href="#atividadeFisica">Atividade Física</a></li>
+					<li><a data-toggle="tab" href="#comportamento">Comportamentos</a></li>
+
+				</ul>
+				<div class="tab-content">
+					<div id="atividadeFisica" class="tab-pane fade in active">
+						<br />
+						<div class="form-group">
+							<label for="avaliado" class="col-sm-2 control-label">Pratica
+								algum tipo de Atividade Fisica?</label>
+
+							<div class="col-sm-3">
+
+								<div class="radio-inline">
+									<label> <input th:field="*{praticaTipoAtividade}"
+										type="radio" name="atividade" id="atividade1" value="true" />
+										Sim
+									</label>
+								</div>
+								<div class="radio-inline">
+									<label> <input type="radio"
+										th:field="*{praticaTipoAtividade}" name="atividade"
+										id="atividade2" value="false" /> Não
+									</label>
+								</div>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label for="frequencia" class="col-sm-2 control-label">Qual
+								frequência?</label>
+
+							<div class="col-sm-3">
+								<select class="form-control" name="frequencia"
+									th:field="*{frequencia}">
+									<option value="">Selecione uma opção</option>
+									<option th:each="frequencia : ${frequencias}"
+										th:value="${frequencia}" th:text="${frequencia.descricao}"></option>
+								</select>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="duracao" class="col-sm-2 control-label">Qual
+								Duração?</label>
+
+							<div class="col-sm-3">
+								<select class="form-control" name="duracao"
+									th:field="*{duracao}">
+									<option value="">Selecione uma opção</option>
+									<option th:each="duracao : ${duracoes}" th:value="${duracao}"
+										th:text="${duracao.descricao}"></option>
+								</select>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="objetivo" class="col-sm-2 control-label">Qual
+								o objetivo?</label>
+
+							<div class="col-sm-3">
+								<select class="form-control" name="duracao"
+									th:field="*{objetivo}">
+									<option value="">Selecione uma opção</option>
+									<option th:each="objetivo : ${objetivos}"
+										th:value="${objetivo}" th:text="${objetivo.descricao}"></option>
+								</select>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="avaliado" class="col-sm-2 control-label">Possui
+								alguma restrição da prática de atividade física?</label>
+
+							<div class="col-sm-3">
+
+								<div class="radio-inline">
+									<label> <input type="radio" th:field="*{restricao}"
+										name="restricao" id="retricao1" value="true" /> Sim
+									</label>
+								</div>
+								<div class="radio-inline">
+									<label> <input type="radio" th:field="*{restricao}"
+										name="restricao" id="restricao2" value="false" /> Não
+									</label>
+								</div>
+							</div>
+						</div>
+						<div class="form-group"
+							th:classappend="${#fields.hasErrors('restricaoQual')} ? has-error">
+							<label for="restricaoQual" class="col-sm-2 control-label">Qual
+								restrição?</label>
+							<div class="col-sm-3">
+								<input type="text" class="form-control text-uppercase"
+									id="restricaoQual" th:field="*{restricaoQual}" />
+							</div>
+						</div>
+
+
+					</div>
+					<div id="comportamento" class="tab-pane fade">
+						<br />
+						<div class="form-group">
+							<label for="fuma" class="col-sm-2 control-label">Você
+								fuma?</label>
+
+							<div class="col-sm-3">
+
+								<div class="radio-inline">
+									<label> <input type="radio" th:field="*{fuma}"
+										name="fuma" id="fuma1" value="true" /> Sim
+									</label>
+								</div>
+								<div class="radio-inline">
+									<label> <input type="radio" th:field="*{fuma}"
+										name="fuma" id="fuma2" value="false" /> Não
+									</label>
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="avaliado" class="col-sm-2 control-label">Faz
+								uso de bebidas alcoólicas?</label>
+
+							<div class="col-sm-3">
+
+								<div class="radio-inline">
+									<label> <input type="radio"
+										th:field="*{bebidaAlcoolica}" name="bebida" id="bebida1"
+										value="true" /> Sim
+									</label>
+								</div>
+								<div class="radio-inline">
+									<label> <input type="radio"
+										th:field="*{bebidaAlcoolica}" name="bebida" id="bebida2"
+										value="false" /> Não
+									</label>
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="avaliado" class="col-sm-2 control-label">Faz
+								uso de algum medicamento?</label>
+
+							<div class="col-sm-3">
+
+								<div class="radio-inline">
+									<label> <input type="radio" th:field="*{medicamento}"
+										name="medicamento" id="medicamento1" value="true" /> Sim
+									</label>
+								</div>
+								<div class="radio-inline">
+									<label> <input type="radio" th:field="*{medicamento}"
+										name="medicamento" id="medicamento2" value="false" /> Não
+									</label>
+								</div>
+							</div>
+						</div>
+						<div class="form-group"
+							th:classappend="${#fields.hasErrors('medicamento')} ? has-error">
+							<label for="restricaoQual" class="col-sm-2 control-label">Qual
+								motivo da medicação?</label>
+							<div class="col-sm-3">
+								<input type="text" class="form-control text-uppercase"
+									id="medicamentoMotivo" th:field="*{medicamentoMotivo}" />
+							</div>
+						</div>
+						<div class="form-group"
+							th:classappend="${#fields.hasErrors('medicamentoQual')} ? has-error">
+							<label for="restricaoQual" class="col-sm-2 control-label">Qual
+								medicação?</label>
+							<div class="col-sm-3">
+								<input type="text" class="form-control text-uppercase"
+									id="restricaoQual" th:field="*{restricaoQual}" />
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="objetivo" class="col-sm-2 control-label">Selecione
+								os problemas que possuir!</label>
+
+							<div class="col-sm-3">
+								<select class="selectpicker form-control" data-width="fit"
+									th:field="*{problema}" multiple="true"
+									title="Escolha os problemas...">
+
+									<option th:each="problema : ${problemas}"
+										th:value="${problema}" th:text="${problema.descricao}"></option>
+
+								</select>
+
+							</div>
+						</div>
+
+
+					</div>
+
+
+				</div>
+
+
+
+
+				<div class="form-group">
+					<div class="col-sm-offset-2 col-sm-10">
+						<button type="submit" class="btn btn-primary">Salvar</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+</section>
+
+</html>

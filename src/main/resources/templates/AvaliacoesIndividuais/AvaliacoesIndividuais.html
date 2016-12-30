@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="LayoutPadrao">
+
+<head>
+<title>Avaliações Individuais</title>
+</head>
+
+<section layout:fragment="conteudo">
+	 
+       
+        
+	<div layout:include="MensagemGeral"></div>
+
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<div class="clearfix">
+				<h1 class="panel-title aw-titulo-panel">Avaliações Individuais</h1>
+				<a class="btn btn-link aw-link-panel"  th:href="@{/avaliacoesIndividuais/novo}">Nova Avaliação
+				</a>
+				
+			</div>
+		</div>
+
+		<div class="panel-body">
+
+
+			<div class="table-responsive">
+				<table id="example" class="table table-bordered table-striped table-condensed"
+					cellspacing="0" width="100%">
+					<thead>
+						<tr>
+							<th>Id</th>
+							<th>Data Avaliação</th>
+							<th>Matrícula</th>
+							<th>Número</th>
+							<th>Opm/Orgão</th>
+							<th>Nome</th>
+							<th></th>
+
+
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="avaliacao : ${avaliacoesIndividuais}">
+							<td th:text="${avaliacao?.id}">1</td>
+							<td th:text="${{avaliacao?.dataAvaliacao}}">Data Avaliação</td>
+							<td th:text="${avaliacao?.pessoa.matricula}">Matricula</td>
+							<td th:text="${avaliacao?.pessoa.numero_pm}">numero</td>
+							<td th:text="${avaliacao?.pessoa.opmOrgao.nome}">orgao</td>
+							<td th:text="${avaliacao?.pessoa.nome}">nome</td>
+							<td class="text-center">
+		   						<a class="btn btn-link btn-xs" th:href="@{/avaliacoesIndividuais/{id}(id=${avaliacao.id})}" 
+		   								title="Editar" rel="tooltip" data-placement="top">
+		   							<span class="glyphicon glyphicon-pencil"></span>
+		   						</a>
+		   						<a class="btn btn-link btn-xs" data-toggle="modal" data-target="#myModalExclusao"
+		   								th:attr="data-id=${avaliacao.id}, data-nome=${avaliacao.pessoa.nome}"
+		   								title="Excluir" rel="tooltip" data-placement="top">
+		   							<span class="glyphicon glyphicon-remove"></span>
+		   						</a>
+		   						
+		   					</td>
+						</tr>
+
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+		<div layout:include="/AvaliacoesIndividuais/ConfirmaExclusaoAvaliacao"></div>
+		
+
+	</div>
+</section>
+</html>

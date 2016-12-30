@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="LayoutPadrao">
+
+<head>
+<title>Cadastro de Militar</title>
+</head>
+
+<section layout:fragment="conteudo">
+	<form class="form-horizontal" method="POST" th:action="@{/pessoas/militar}"
+		th:object="${pessoa}">
+		<div layout:include="MensagemGeral"></div>
+		<div layout:include="MensagemErro"></div>
+
+
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<div class="clearfix">
+					<h1 class="panel-title aw-titulo-panel">Nova Pessoa</h1>
+					<a class="btn btn-link aw-link-panel" th:href="@{/pessoas}">Voltar
+						para Pessoas</a>
+				</div>
+			</div>
+
+			<div class="panel-body">
+				<input type="hidden" th:field="*{id}" />
+				<ul class="nav nav-tabs">
+					<li class="active"><a data-toggle="tab" href="#dadosPessoais">Dados
+							Pessoais</a></li>
+					<li><a data-toggle="tab" href="#dadosMilitares">Dados
+							Militares</a></li>
+					<li><a data-toggle="tab" href="#endereco">Endereço</a></li>
+					<li><a data-toggle="tab" href="#contato">Contatos</a></li>
+				</ul>
+				<div class="tab-content">
+					<div id="dadosPessoais" class="tab-pane fade in active">
+						<br />
+						<div class="form-group"
+							th:classappend="${#fields.hasErrors('nome')} ? has-error">
+							<label for="nome" class="col-sm-2 control-label">Nome</label>
+							<div class="col-sm-5">
+								<input type="text" class="form-control text-uppercase" id="nome"
+									th:field="*{nome}" />
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="sexo" class="col-sm-2 control-label">Sexo</label>
+							<div class="col-sm-2">
+								<select class="form-control" name="sexo" th:field="*{sexo}">
+									<option value="">Selecione uma opção</option>
+									<option th:each="sexo : ${sexos}" th:value="${sexo}"
+										th:text="${sexo.descricao}"></option>
+								</select>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="estadoCivil" class="col-sm-2 control-label">Estado
+								Civil</label>
+							<div class="col-sm-2">
+								<select class="form-control" name="estadoCivil"
+									th:field="*{estado_civil}">
+									<option value="">Selecione uma opção</option>
+									<option th:each="estadoCivil : ${estadosCivis}"
+										th:value="${estadoCivil}" th:text="${estadoCivil.descricao}"></option>
+								</select>
+							</div>
+						</div>
+						<div class="form-group"
+							th:classappend="${#fields.hasErrors('datanasc')} ? has-error">
+							<label for="dataNascimento" class="col-sm-2 control-label">Data
+								Nascimento</label>
+							<div class="col-sm-2">
+								<input type="text" class="form-control" id="dataNascimento"
+									name="data" th:field="*{datanasc}" data-provide="datepicker"
+									data-date-language="pt-BR" data-date-autoclose="true"
+									data-date-today-highlight="true" data-date-orientation="bottom" />
+							</div>
+						</div>
+						<div class="form-group"
+							th:classappend="${#fields.hasErrors('cpf')} ? has-error">
+							<label for="cpf" class="col-sm-2 control-label">CPF</label>
+							<div class="col-sm-3">
+								<input type="text" class="form-control text-uppercase" id="cpf"
+									th:field="*{cpf}" />
+							</div>
+						</div>
+					</div>
+					<div id="dadosMilitares" class="tab-pane fade">
+						<br />
+						<div class="form-group"
+							th:classappend="${#fields.hasErrors('matricula')} ? has-error">
+							<label for="matricula" class="col-sm-2 control-label">Matrícula</label>
+							<div class="col-sm-3">
+								<input type="text" class="form-control text-uppercase"
+									id="matricula" th:field="*{matricula}" />
+							</div>
+						</div>
+						<div class="form-group"
+							th:classappend="${#fields.hasErrors('numero')} ? has-error">
+							<label for="numero" class="col-sm-2 control-label">Número</label>
+							<div class="col-sm-2">
+								<input type="text" class="form-control text-uppercase"
+									id="numero" th:field="*{numero_pm}" />
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="cargo" class="col-sm-2 control-label">Posto/Grad.</label>
+							<div class="col-sm-2">
+								<select class="form-control" name="sexo" th:field="*{cargo}">
+									<option value="">Selecione uma opção</option>
+									<option th:each="cargo : ${cargos}" th:value="${cargo.id}"
+										th:text="${cargo.nome}"></option>
+								</select>
+							</div>
+						</div>
+						<div class="form-group"
+							th:classappend="${#fields.hasErrors('nome_guerra')} ? has-error">
+							<label for="numero" class="col-sm-2 control-label">Nome
+								de guerra</label>
+							<div class="col-sm-3">
+								<input type="text" class="form-control text-uppercase"
+									id="nome_guerra" th:field="*{nome_guerra}" />
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="opmOrgao" class="col-sm-2 control-label">OPM</label>
+							<div class="col-sm-3">
+								<select class="form-control" name="opmOrgao"
+									th:field="*{opmOrgao}">
+									<option value="">Selecione uma opção</option>
+									<option th:each="opm : ${opms}" th:value="${opm.id}"
+										th:text="${opm.nome}"></option>
+								</select>
+							</div>
+						</div>
+
+					</div>
+					<div id="endereco" class="tab-pane fade">
+						<br />
+						<div class="form-group">
+							<label for="cidade" class="col-sm-2 control-label">Cidade</label>
+							<div class="col-sm-2">
+								<select class="form-control" name="cidade">
+									<option th:each="cidade : ${cidades}" th:value="${cidade.id}"
+										th:text="${cidade.nome}"></option>
+								</select>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="bairro" class="col-sm-2 control-label">Bairro</label>
+							<div class="col-sm-2">
+								<select class="form-control" name="bairro" th:field="*{bairro}">
+									<option th:each="bairro : ${bairros}" th:value="${bairro.id}"
+										th:text="${bairro.nome}"></option>
+								</select>
+							</div>
+						</div>
+						<div class="form-group"
+							th:classappend="${#fields.hasErrors('logradouro')} ? has-error">
+							<label for="logradouro" class="col-sm-2 control-label">Logradouro</label>
+							<div class="col-sm-4">
+								<input type="text" class="form-control text-uppercase"
+									id="logradouro" th:field="*{logradouro}" />
+							</div>
+						</div>
+						<div class="form-group"
+							th:classappend="${#fields.hasErrors('numero')} ? has-error">
+							<label for="numero" class="col-sm-2 control-label">Número</label>
+							<div class="col-sm-2">
+								<input type="text" class="form-control text-uppercase"
+									id="numero" th:field="*{numero}" />
+							</div>
+						</div>
+						<div class="form-group"
+							th:classappend="${#fields.hasErrors('complemento')} ? has-error">
+							<label for="complemento" class="col-sm-2 control-label">Complemento</label>
+							<div class="col-sm-3">
+								<input type="text" class="form-control text-uppercase"
+									id="complemento" th:field="*{complemento}" />
+							</div>
+						</div>
+						<div class="form-group"
+							th:classappend="${#fields.hasErrors('cep')} ? has-error">
+							<label for="cep" class="col-sm-2 control-label">CEP</label>
+							<div class="col-sm-3">
+								<input type="text" class="form-control text-uppercase" id="cep"
+									th:field="*{cep}" />
+							</div>
+						</div>
+					</div>
+					<div id="contato" class="tab-pane fade">
+						<br />
+						<div class="form-group"
+							th:classappend="${#fields.hasErrors('telefone1')} ? has-error">
+							<label for="telefone1" class="col-sm-2 control-label">Telefone
+								1</label>
+							<div class="col-sm-2">
+								<input type="text" class="form-control text-uppercase"
+									id="telefone1" th:field="*{telefone1}" />
+							</div>
+						</div>
+						<div class="form-group"
+							th:classappend="${#fields.hasErrors('telefone2')} ? has-error">
+							<label for="telefone2" class="col-sm-2 control-label">Telefone
+								2</label>
+							<div class="col-sm-2">
+								<input type="text" class="form-control text-uppercase"
+									id="telefone2" th:field="*{telefone2}" />
+							</div>
+						</div>
+						<div class="form-group"
+							th:classappend="${#fields.hasErrors('email')} ? has-error">
+							<label for="email" class="col-sm-2 control-label">Email</label>
+							<div class="col-sm-3">
+								<input type="text" class="form-control text-lowercase"
+									id="email" th:field="*{email}" />
+							</div>
+						</div>
+
+					</div>
+				</div>
+
+
+
+
+				<div class="form-group">
+					<div class="col-sm-offset-2 col-sm-10">
+						<button type="submit" class="btn btn-primary">Salvar</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+</section>
+</html>
