@@ -17,6 +17,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import br.com.fireware.bpchoque.entity.Pessoa;
 import br.com.fireware.bpchoque.entity.def.ResultadoTAF;
 import br.com.fireware.bpchoque.entity.def.TesteFisico;
+import br.com.fireware.bpchoque.entity.def.TesteFisico.Media;
 import br.com.fireware.bpchoque.entity.def.TesteFisico.StatusTeste;
 import br.com.fireware.bpchoque.entity.def.TesteFisico.TipoTesteFisico;
 import br.com.fireware.bpchoque.service.PessoaService;
@@ -156,6 +157,11 @@ public class TesteFisicoController {
 	@ModelAttribute("status")
 	public List<StatusTeste> status() {
 		return Arrays.asList(StatusTeste.values());
+	}
+	
+	@ModelAttribute("medias")
+	public List<Media> media() {
+		return Arrays.asList(Media.values());
 	}
 
 }

@@ -64,14 +64,7 @@
 						</select>
 					</div>
 				</div>
-				<div class="form-group"
-					th:classappend="${#fields.hasErrors('objetivo')} ? has-error">
-					<label for="objetivo" class="col-sm-2 control-label">Objetivo</label>
-					<div class="col-sm-3">
-						<input type="text" class="form-control text-uppercase"
-							id="objetivo" th:field="*{objetivo}" />
-					</div>
-				</div>
+				
 				<div class="form-group">
 					<label for="status" class="col-sm-2 control-label">Status</label>
 
@@ -84,9 +77,28 @@
 						</select>
 					</div>
 				</div>
+				<div class="form-group">
+					<label for="status" class="col-sm-2 control-label">Média</label>
 
+					<div class="col-sm-3">
+						<select class="form-control" name="media"
+							th:field="*{media}">
+							<option value="">Selecione uma opção</option>
+							<option th:each="media : ${medias}"
+								th:value="${media.descricao}" th:text="${media.descricao}"></option>
+						</select>
+					</div>
+				</div>
+				<div class="form-group"
+					th:classappend="${#fields.hasErrors('objetivo')} ? has-error">
+					<label for="objetivo" class="col-sm-2 control-label">Objetivo</label>
+					<div class="col-sm-3">
+						<input type="text" class="form-control text-uppercase"
+							id="objetivo" th:field="*{objetivo}" />
+					</div>
+				</div>
 				<div th:if="${resultadoVisivel}" layout:include="/TestesFisicos/Resultados"></div>
-
+				
 				
 
 

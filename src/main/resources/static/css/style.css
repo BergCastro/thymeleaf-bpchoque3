@@ -3,6 +3,7 @@
 	.panel-default {
 		margin-left: 10px;
 		margin-right: 10px;
+		margin-top: 10px;
 	}
 	
 	.alert {
@@ -31,6 +32,7 @@
 .container{
 	width: 100%;
 	padding: 0;
+	
 }
 .img-slide{
 	width: 100%;
